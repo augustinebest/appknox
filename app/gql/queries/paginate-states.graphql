@@ -1,0 +1,30 @@
+query PaginateStates(
+  $id: Int
+  $first: Int
+  $after: String
+  $last: Int
+  $before: String
+) {
+  states(
+    filter: { cid: $id }
+    page: { first: $first, after: $after, last: $last, before: $before }
+  ) {
+    totalCount
+    edges {
+      cursor
+      node {
+        name
+        state_code
+        country_code
+        latitude
+        longitude
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+      startCursor
+    }
+  }
+}
