@@ -1,3 +1,22 @@
-query countries {
-      name
+query CountriesQuery ($first: Int) {
+  countries(page: { first: $first }) {
+    totalCount
+    edges {
+      cursor
+      node {
+        id
+        name
+        iso3
+        emoji
+        currency
+        capital
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      endCursor
+      startCursor
+    }
   }
+}
