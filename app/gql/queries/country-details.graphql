@@ -1,0 +1,24 @@
+query GetCountryDeetail($id: Int) {
+  country(id: $id) {
+    id
+    name
+    currency
+    currency_symbol
+    phone_code
+    capital
+    emoji
+    states(page: { first: 20 }) {
+      totalCount
+      edges {
+        cursor
+        node {
+          id
+          name
+          state_code
+          latitude
+          longitude
+        }
+      }
+    }
+  }
+}
