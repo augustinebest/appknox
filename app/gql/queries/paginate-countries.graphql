@@ -1,0 +1,22 @@
+query GetCountries($first: Int, $after: String, $last: Int, $before: String) {
+  countries(
+    page: { first: $first, after: $after, last: $last, before: $before }
+  ) {
+    edges {
+      node {
+        id
+        name
+        iso3
+        emoji
+        currency
+        capital
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
