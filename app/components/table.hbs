@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        {{#each @headers as |header|}}
+          <th scope="col">{{header}}</th>
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each @rows as |row|}}
+        <tr>
+          {{#each this.columns as |column index|}}
+            {{#if (eq index 0)}}
+              <th>{{get row.node column}}</th>
+            {{else if (eq column "name")}}
+              {{#if this.transitionToRouteAvailable}}
+                <td
+                  class="table_navigation"
+                  {{on "click" (fn this.handleTransitionRoute row.node)}}
+                >{{get row.node column}}</td>
+              {{else}}
+                <td>{{#if (is-empty (get row.node column))}}<span
+                    >-</span>{{else}}{{get row.node column}}{{/if}}</td>
+              {{/if}}
+            {{else}}
+              <td>{{#if (is-empty (get row.node column))}}<span
+                  >-</span>{{else}}{{get row.node column}}{{/if}}</td>
+            {{/if}}
+          {{/each}}
+        </tr>
+      {{/each}}
+      {{#if (is-empty @rows)}}
+        <tr>
+          <td class="table_no_data" colspan="{{this.columns.length}}">No data
+            available</td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+</div>
