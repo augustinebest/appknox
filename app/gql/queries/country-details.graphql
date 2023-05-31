@@ -1,4 +1,4 @@
-query GetCountryDeetail($id: Int) {
+query GetCountryDeetail($id: Int, $first: Int) {
   country(id: $id) {
     id
     name
@@ -7,7 +7,7 @@ query GetCountryDeetail($id: Int) {
     phone_code
     capital
     emoji
-    states(page: { first: 20 }) {
+    states(page: { first: $first }) {
       totalCount
       edges {
         cursor
@@ -18,6 +18,12 @@ query GetCountryDeetail($id: Int) {
           latitude
           longitude
         }
+      }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        endCursor
+        startCursor
       }
     }
   }
