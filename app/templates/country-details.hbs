@@ -20,4 +20,19 @@
       </div>
     </div>
   </div>
+
+  {{! Table for states }}
+  <div class="cd_table">
+    <Table @headers={{this.headers}} @rows={{this.states}} />
+
+    {{! Pagination }}
+    <div>
+      <Pagination
+        @handlePreviousPage={{this.handlePreviousPage}}
+        @handleNextPage={{this.handleNextPage}}
+        @checkNextPage={{this.checkNextPage}}
+        @checkPreviousPage={{this.checkPreviousPage}}
+      />
+    </div>
+  </div>
 </div>
