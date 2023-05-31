@@ -8,12 +8,15 @@ import { tracked } from '@glimmer/tracking';
 export default class CountriesListController extends Controller {
   @service apollo;
   @service router;
+  @service errorHandler;
 
   @tracked countries = [];
   @tracked pageInfo = {};
   count = 20;
 
   queryManager = new ApolloQueryManager(this.apollo);
+
+  headers = ['id', 'name', 'currency', 'capital'];
 
   get checkNextPage() {
     return this.pageInfo.hasNextPage;
@@ -23,16 +26,15 @@ export default class CountriesListController extends Controller {
     return this.pageInfo.hasPreviousPage;
   }
 
+  get checkErrorMessage() {
+    return this.errorHandler.errorMessage;
+  }
+
   @action
   transitionToRouteWithCount() {
     this.router.transitionTo('index-route', {
       queryParams: { count: this.count },
     });
-  }
-
-  @action
-  transitionToRoute(country) {
-    this.router.transitionTo('country-details', country.node.id);
   }
 
   @action
