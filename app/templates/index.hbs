@@ -1,74 +1,30 @@
-{{! Header }}
-<div class="app_header">
-  <div>
-    <img src="/assets/images/appknox-logo.png" alt="logo" />
+<div>
+  {{! Header }}
+  <div class="app_header">
+    <div>
+      <img src="/assets/images/appknox-logo.png" alt="logo" />
+    </div>
   </div>
-</div>
-{{! Jumbotron }}
-<div class="app_jumbotron">
-  <div>
-    <h1>Explore geographic data of countries from the GeographQL service</h1>
-    <h5>As part of your SDLC, our automated tools and team of penetration
-      testers will make your application secure. Read more at:
-      https://www.appknox.com/</h5>
+  {{! Jumbotron }}
+  <div class="app_jumbotron">
+    <div>
+      <h1>Explore geographic data of countries from the GeographQL service</h1>
+      <h5>As part of your SDLC, our automated tools and team of penetration
+        testers will make your application secure. Read more at:
+        https://www.appknox.com/</h5>
+    </div>
   </div>
-</div>
-<div class="app_table">
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Currency</th>
-          <th scope="col">Capital</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each this.countries as |country index|}}
-          <tr
-            {{on
-              "click"
-              (fn this.transitionToRoute country)
-            }}
-          >
-            <th scope="row">{{country.node.id}}</th>
-            <td>{{country.node.name}}</td>
-            <td>{{country.node.currency}}</td>
-            <td>
-              {{#if country.node.capital}}
-                <span>{{country.node.capital}}</span>
-              {{else}} <span>-</span> {{/if}}
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
-  <div class="app_pagination">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li
-          class="page-item {{unless this.checkPreviousPage 'disabled'}}"
-          {{action "handlePreviousPage"}}
-        >
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-            <span>Previous</span>
-          </a>
-        </li>
-        <li
-          class="page-item {{unless this.checkNextPage 'disabled'}}"
-          {{action "handleNextPage"}}
-        >
-          <a class="page-link" href="#" aria-label="Next">
-            <span>Next</span>
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+  <div class="app_table">
+    <Table @headers={{this.headers}} @rows={{this.countries}} />
+
+    {{! Pagination }}
+    <div>
+      <Pagination
+        @handlePreviousPage={{this.handlePreviousPage}}
+        @handleNextPage={{this.handleNextPage}}
+        @checkNextPage={{this.checkNextPage}}
+        @checkPreviousPage={{this.checkPreviousPage}}
+      />
+    </div>
   </div>
 </div>
