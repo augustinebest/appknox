@@ -27,6 +27,11 @@ export default class CountryDetailsController extends Controller {
   }
 
   @action
+  goBack() {
+    this.router.transitionTo('/');
+  }
+
+  @action
   resetController() {
     this.details = {};
     this.states = [];
