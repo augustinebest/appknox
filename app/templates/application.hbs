@@ -1,7 +1,16 @@
-{{page-title "Appknox"}}
-
-{{!-- The following component displays Ember's default welcome message. --}}
-{{!-- <WelcomePage /> --}}
-{{!-- Feel free to remove this! --}}
-{{!-- This is the application page --}}
+{{! Alert }}
+{{#if this.checkErrorMessage}}
+  <div class="app_alert">
+    <div class="alert alert-danger alert-dismissible show">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        {{on "click" this.errorHandler.clearError}}
+      >&times;</button>
+      <strong><i class="fa fa-warning"></i></strong>
+      {{this.checkErrorMessage}}
+    </div>
+  </div>
+{{/if}}
 {{outlet}}
