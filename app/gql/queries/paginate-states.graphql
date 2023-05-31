@@ -13,6 +13,7 @@ query PaginateStates(
     edges {
       cursor
       node {
+        id
         name
         state_code
         country_code
